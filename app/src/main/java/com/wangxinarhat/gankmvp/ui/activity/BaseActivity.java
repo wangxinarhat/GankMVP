@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import com.wangxinarhat.gankmvp.R;
 import com.wangxinarhat.gankmvp.base.BasePresenter;
 
-import butterknife.BindView;
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
+    @Bind(R.id.toolbar)
     Toolbar mToolbar;
 
     protected P mPresenter;
@@ -30,6 +30,12 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         initPresenter();
         checkPresenterIsNull();
         initToolBar();
+    }
+
+    public void setTitle(String strTitle,boolean showHome){
+        setTitle(strTitle);
+        getSupportActionBar().setDisplayShowHomeEnabled(showHome);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(showHome);
     }
 
     @Override
@@ -60,6 +66,10 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         return -1;
     }
 
+    protected abstract void initPresenter();
+
+    protected abstract int getLayout();
+
     private void initToolBar() {
         if (mToolbar == null) {
             throw new NullPointerException("please add a Toolbar in your layout.");
@@ -73,7 +83,4 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         }
     }
 
-    protected abstract void initPresenter();
-
-    protected abstract int getLayout();
 }

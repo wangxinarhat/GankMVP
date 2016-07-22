@@ -8,17 +8,15 @@ import com.wangxinarhat.gankmvp.R;
 import com.wangxinarhat.gankmvp.base.BasePresenter;
 import com.wangxinarhat.gankmvp.ui.view.SwipeRefreshView;
 
-import java.io.File;
-
-import butterknife.BindView;
+import butterknife.Bind;
 
 /**
  * Created by wang on 2016/7/21.
  */
 public abstract class BaseSwipeRefreshActivity<P extends BasePresenter> extends BaseActivity<P> implements SwipeRefreshView {
 
-    @BindView(R.id.swipe_refresh_layout)
-    protected SwipeRefreshLayout mSwipeRefreshLayout;
+    @Bind(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +25,15 @@ public abstract class BaseSwipeRefreshActivity<P extends BasePresenter> extends 
     }
 
     private void initSwipeLayout() {
+        if (mSwipeRefreshLayout == null) {
+            throw new NullPointerException("please add a SwipeRefreshLayout in your layout.");
+        }
         mSwipeRefreshLayout.setColorSchemeColors(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (prepareRefresh()) {
-                    onRefreshedStarted();
+                    onRefreshStarted();
                 } else {
                     hideRefresh();
                 }
@@ -40,7 +41,7 @@ public abstract class BaseSwipeRefreshActivity<P extends BasePresenter> extends 
         });
     }
 
-    protected abstract void onRefreshedStarted();
+    protected abstract void onRefreshStarted();
 
 
     protected boolean prepareRefresh() {
@@ -74,6 +75,7 @@ public abstract class BaseSwipeRefreshActivity<P extends BasePresenter> extends 
 
     /**
      * check refreshlayout is refreshing
+     *
      * @return
      */
     @CheckResult
@@ -81,16 +83,4 @@ public abstract class BaseSwipeRefreshActivity<P extends BasePresenter> extends 
         return mSwipeRefreshLayout.isRefreshing();
     }
 
-    /*
-
-    void getDataFinish();
-
-    void showEmptyView();
-
-    void showErrorView(Throwable throwable);
-
-    void showRefresh();
-
-    void hideRefresh();
-*/
 }

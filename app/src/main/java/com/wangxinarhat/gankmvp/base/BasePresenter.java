@@ -16,8 +16,23 @@
 
 package com.wangxinarhat.gankmvp.base;
 
-public interface BasePresenter {
+import android.app.Activity;
 
-    void start();
+import com.wangxinarhat.gankmvp.api.GankService;
+import com.wangxinarhat.gankmvp.api.MainFactory;
 
+public class BasePresenter<GV extends BaseView> {
+
+    protected GV mView;
+    /**
+     * TODO 这里用是否用Activity待考证
+     */
+    protected Activity mContext;
+
+    public static final GankService mGankService = MainFactory.getGankServiceInstance();
+
+    public BasePresenter(Activity context, GV view) {
+        mContext = context;
+        mView = view;
+    }
 }

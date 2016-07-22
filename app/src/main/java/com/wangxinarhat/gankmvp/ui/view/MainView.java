@@ -15,7 +15,7 @@ public interface MainView<T extends Soul> extends SwipeRefreshView {
     void appendMoreData2View(List<T> data);
 
 
-    void hasMoreData();
+    void hasNoMoreData();
 
     void showChangeLogInfo(String assetFileName);
 
