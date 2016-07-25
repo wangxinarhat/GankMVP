@@ -20,24 +20,21 @@
 package com.wangxinarhat.gankmvp.data.entity;
 
 
+import com.google.gson.annotations.SerializedName;
 import com.wangxinarhat.gankmvp.api.GankCategory;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class Gank extends Soul implements Cloneable,Serializable{
-
-    /**
-     * createdAt : 2015-10-06T08:23:35.565Z
-     * publishedAt : 2015-10-08T01:29:48.811Z
-     * used : true
-     * type : 休息视频
-     * url : http://v.youku.com/v_show/id_XMTY4OTE3OTQ4.html
-     * who : lxxself
-     * desc : 耐克还有这广告，我良辰服气
-     * updatedAt : 2015-10-08T01:29:49.219Z
-     */
-
+/**
+ * model class for a Gank.
+ *
+ * @author wangxinarhat
+ *         creat at 2016/7/25
+ */
+public class Gank extends BaseEntity implements Cloneable, Serializable {
+    @SerializedName("_id")
+    public String id;
     public boolean used;
     public String type;
     public String url;
@@ -52,16 +49,16 @@ public class Gank extends Soul implements Cloneable,Serializable{
      */
     public boolean isHeader;
 
-    public boolean is妹子(){
+    public boolean isWelfare() {
         return type.equals(GankCategory.福利.name());
     }
 
     @Override
     public Gank clone() {
         Gank gank = null;
-        try{
-            gank = (Gank)super.clone();
-        }catch(CloneNotSupportedException e) {
+        try {
+            gank = (Gank) super.clone();
+        } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
         return gank;

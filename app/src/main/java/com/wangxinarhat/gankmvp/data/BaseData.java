@@ -18,10 +18,10 @@
  */
 
 package com.wangxinarhat.gankmvp.data;
-
 /**
- * Created by GuDong on 9/28/15.
- * Contact with gudong.name@gmail.com
+ * list base data 
+ * @author wangxinarhat 
+ * creat at 2016/7/25
  */
 public class BaseData {
     public boolean error;

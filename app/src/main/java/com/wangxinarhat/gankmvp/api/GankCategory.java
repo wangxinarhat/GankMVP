@@ -19,6 +19,11 @@
 
 package com.wangxinarhat.gankmvp.api;
 
+/**
+ *
+ * @author wangxinarhat
+ * creat at 2016/7/25
+ */
 public enum GankCategory {
     福利,
     iOS,

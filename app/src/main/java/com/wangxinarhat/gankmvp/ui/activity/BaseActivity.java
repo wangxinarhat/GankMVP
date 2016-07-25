@@ -32,7 +32,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         initToolBar();
     }
 
-    public void setTitle(String strTitle,boolean showHome){
+    public void setTitle(String strTitle, boolean showHome) {
         setTitle(strTitle);
         getSupportActionBar().setDisplayShowHomeEnabled(showHome);
         getSupportActionBar().setDisplayHomeAsUpEnabled(showHome);
@@ -62,14 +62,30 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * get menu res, for extension
+     *
+     * @return
+     */
     protected int getMenuRes() {
         return -1;
     }
 
+    /**
+     * init presenter
+     */
     protected abstract void initPresenter();
 
+    /**
+     * get layout id
+     *
+     * @return layout id for activity
+     */
     protected abstract int getLayout();
 
+    /**
+     * init toolbar
+     */
     private void initToolBar() {
         if (mToolbar == null) {
             throw new NullPointerException("please add a Toolbar in your layout.");
@@ -77,6 +93,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         setSupportActionBar(mToolbar);
     }
 
+    /**
+     * check presenter
+     */
     private void checkPresenterIsNull() {
         if (null == mPresenter) {
             throw new IllegalStateException("mPresenter is null!");

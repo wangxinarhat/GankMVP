@@ -19,7 +19,11 @@
 
 package com.wangxinarhat.gankmvp.data.entity;
 
-public class Soul {
-    protected long id;
-    public String objectId;
+/**
+ * Base Entity
+ *
+ * @author wangxinarhat
+ *         creat at 2016/7/25
+ */
+public class BaseEntity {
 }

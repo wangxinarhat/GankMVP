@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.wangxinarhat.gankmvp.R;
 import com.wangxinarhat.gankmvp.data.entity.Gank;
+import com.wangxinarhat.gankmvp.interfaces.OnRecyclerViewItemClickListener;
 import com.wangxinarhat.gankmvp.presenter.MainPresenter;
 import com.wangxinarhat.gankmvp.ui.adapter.MainAdapter;
 import com.wangxinarhat.gankmvp.ui.view.MainView;
@@ -22,7 +23,7 @@ import butterknife.Bind;
 /**
  * Created by wang on 2016/7/22.
  */
-public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter>implements MainView<Gank> {
+public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter> implements MainView<Gank>,OnRecyclerViewItemClickListener {
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -32,6 +33,7 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter>impleme
      * the flag of has more data or not
      */
     private boolean mHasMoreData = true;
+
 
     @Override
     protected void onRefreshStarted() {
@@ -47,7 +49,7 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter>impleme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initRecycleView();
-        setTitle(getString(R.string.app_name),false);
+        setTitle(getString(R.string.app_name), false);
     }
 
     @Override
@@ -62,32 +64,54 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter>impleme
         }, 568);
         getData();
     }
+
+    /**
+     * pull to refresh
+     */
     private void getData() {
         mPresenter.getData(new Date(System.currentTimeMillis()));
     }
 
 
+    /**
+     * get layout id for this activity
+     *
+     * @return id of layout
+     */
     @Override
     protected int getLayout() {
         return R.layout.activity_main;
     }
 
+    /**
+     * show view for no data
+     */
     @Override
     public void showEmptyView() {
 
     }
 
+    /**
+     * show error view
+     *
+     * @param throwable
+     */
     @Override
     public void showErrorView(Throwable throwable) {
 
     }
 
+    /**
+     * init RecyclerView Widget
+     */
     private void initRecycleView() {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new MainAdapter();
 
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(this);
+
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -123,19 +147,21 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter>impleme
                 .setAction("发回顶部", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        (mRecyclerView.getLayoutManager()).smoothScrollToPosition(mRecyclerView,null,0);
+                        (mRecyclerView.getLayoutManager()).smoothScrollToPosition(mRecyclerView, null, 0);
                     }
                 })
                 .show();
     }
 
-    @Override
-    public void showChangeLogInfo(String assetFileName) {
-
-    }
 
     @Override
     protected int getMenuRes() {
-        return  R.menu.menu_main;
+        return R.menu.menu_main;
+    }
+
+
+    @Override
+    public void onItemClick(View view, int position) {
+
     }
 }

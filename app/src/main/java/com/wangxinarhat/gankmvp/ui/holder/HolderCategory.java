@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.wangxinarhat.gankmvp.R;
 import com.wangxinarhat.gankmvp.data.entity.Gank;
+import com.wangxinarhat.gankmvp.interfaces.OnRecyclerViewItemClickListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -15,8 +16,8 @@ import butterknife.ButterKnife;
 public class HolderCategory extends BaseHolder {
     @Bind(R.id.tv_category)
     TextView mTvCategory;
-    public HolderCategory(View itemView) {
-        super(itemView);
+    public HolderCategory(View itemView,OnRecyclerViewItemClickListener listener) {
+        super(itemView,listener);
         ButterKnife.bind(this, itemView);
     }
 

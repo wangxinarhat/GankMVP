@@ -28,8 +28,9 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by GuDong on 15/10/8.
- * Contact with gudong.name@gmail.com
+ * Retrofit setting
+ * @author wangxinarhat
+ * creat at 2016/7/25
  */
 public class RetrofitHelper {
 
@@ -48,7 +49,6 @@ public class RetrofitHelper {
                 .client(client)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
-
                 .build();
         mService = retrofit.create(GankService.class);
     }

@@ -15,6 +15,13 @@
  */
 
 package com.wangxinarhat.gankmvp.base;
+
+/**
+ * Base View
+ *
+ * @author wangxinarhat
+ *         creat at 2016/7/25
+ */
 public interface BaseView {
 
 

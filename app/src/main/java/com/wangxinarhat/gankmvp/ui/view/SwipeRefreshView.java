@@ -7,6 +7,7 @@ import com.wangxinarhat.gankmvp.base.BaseView;
  */
 public interface SwipeRefreshView extends BaseView{
 
+
     void getDataFinish();
 
     void showEmptyView();

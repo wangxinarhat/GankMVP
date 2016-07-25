@@ -7,8 +7,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 /**
- * Glide 工具类
- * Created by sacowiw on 16/1/28.
+ * Glide utils
+ * @author wangxinarhat 
+ * creat at 2016/7/25
  */
 public class GlideUtils {
     public static void loadImage(Context context, String imageUrl, ImageView imageView) {

@@ -21,6 +21,12 @@ import android.app.Activity;
 import com.wangxinarhat.gankmvp.api.GankService;
 import com.wangxinarhat.gankmvp.api.MainFactory;
 
+/**
+ * Base Presenter
+ *
+ * @author wangxinarhat
+ *         creat at 2016/7/25
+ */
 public class BasePresenter<GV extends BaseView> {
 
     protected GV mView;
@@ -29,7 +35,7 @@ public class BasePresenter<GV extends BaseView> {
      */
     protected Activity mContext;
 
-    public static final GankService mGankService = MainFactory.getGankServiceInstance();
+    public static final GankService mGankService = MainFactory.getGankService();
 
     public BasePresenter(Activity context, GV view) {
         mContext = context;

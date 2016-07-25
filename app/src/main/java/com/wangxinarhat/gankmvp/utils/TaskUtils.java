@@ -17,35 +17,23 @@
  * along with Meizhi.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wangxinarhat.gankmvp.data.entity;
+package com.wangxinarhat.gankmvp.utils;
 
-
-import java.util.Date;
+import android.os.AsyncTask;
+import android.os.Build;
 
 /**
- * meizi
- * @author wangxinarhat 
- * creat at 2016/7/25
+ * Created by drak11t on 8/16/14.
  */
-public class Girl extends BaseEntity {
+public class TaskUtils {
 
-    /**
-     * createdAt : 2015-10-07T05:42:23.910Z
-     * publishedAt : 2015-10-08T01:29:48.812Z
-     * used : true
-     * type : 福利
-     * url : http://ww4.sinaimg.cn/large/7a8aed7bgw1ewsip9thfoj20hs0qo774.jpg
-     * who : 张涵宇
-     * desc : 10.8
-     * updatedAt : 2015-10-08T01:29:49.400Z
-     */
-
-    public boolean used;
-    public String type;
-    public String url;
-    public String who;
-    public String desc;
-    public Date createdAt;
-    public Date publishedAt;
-    public Date updatedAt;
+    @SafeVarargs public static <Params, Progress, Result> void executeAsyncTask(
+        AsyncTask<Params, Progress, Result> task, Params... params) {
+        if (Build.VERSION.SDK_INT >= 11) {
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+        }
+        else {
+            task.execute(params);
+        }
+    }
 }

@@ -5,4 +5,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+
+    <string name="picture_save_fail">图片保存失败，请再次尝试保存！</string>
+    <string name="picture_has_save_to">图片已保存至 %s 文件夹</string>
+    <string name="unknow">未知</string>
 </resources>

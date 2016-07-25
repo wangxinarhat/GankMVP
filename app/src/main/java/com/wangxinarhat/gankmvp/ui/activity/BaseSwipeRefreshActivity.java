@@ -24,6 +24,9 @@ public abstract class BaseSwipeRefreshActivity<P extends BasePresenter> extends 
         initSwipeLayout();
     }
 
+    /**
+     * init SwipeRefreshLayout Widget
+     */
     private void initSwipeLayout() {
         if (mSwipeRefreshLayout == null) {
             throw new NullPointerException("please add a SwipeRefreshLayout in your layout.");
@@ -41,15 +44,23 @@ public abstract class BaseSwipeRefreshActivity<P extends BasePresenter> extends 
         });
     }
 
+    /**
+     * pull to refresh
+     */
     protected abstract void onRefreshStarted();
 
 
+    /**
+     * for Extension
+     *
+     * @return if true means refreshable
+     */
     protected boolean prepareRefresh() {
         return true;
     }
 
     /**
-     * 让子弹飞一会儿
+     * cancel SwipeRefreshLayout refreshing status，deley 1000ms
      */
     @Override
     public void hideRefresh() {
@@ -60,14 +71,22 @@ public abstract class BaseSwipeRefreshActivity<P extends BasePresenter> extends 
                     mSwipeRefreshLayout.setRefreshing(false);
                 }
             }
-        }, 2000);
+        }, 1000);
     }
 
+
+    /**
+     * to get data finish
+     */
     @Override
     public void getDataFinish() {
         hideRefresh();
     }
 
+
+    /**
+     * show loading data status
+     */
     @Override
     public void showRefresh() {
         mSwipeRefreshLayout.setRefreshing(true);
@@ -76,7 +95,7 @@ public abstract class BaseSwipeRefreshActivity<P extends BasePresenter> extends 
     /**
      * check refreshlayout is refreshing
      *
-     * @return
+     * @return true -> refreshing
      */
     @CheckResult
     protected boolean isRefreshing() {

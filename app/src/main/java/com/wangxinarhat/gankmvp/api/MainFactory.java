@@ -20,7 +20,10 @@
 package com.wangxinarhat.gankmvp.api;
 
 /**
- * 数据主机地址
+ * data factory
+ *
+ * @author wangxinarhat
+ *         creat at 2016/7/25
  */
 public class MainFactory {
 
@@ -28,9 +31,9 @@ public class MainFactory {
 
     protected static final Object monitor = new Object();
 
-    public static GankService getGankServiceInstance(){
-        synchronized (monitor){
-            if(mGankService==null){
+    public static GankService getGankService() {
+        synchronized (monitor) {
+            if (mGankService == null) {
                 mGankService = new RetrofitHelper().getService();
             }
             return mGankService;
