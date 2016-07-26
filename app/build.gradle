@@ -26,6 +26,7 @@ android {
 
     buildTypes {
 
+
         release {
             println 'build - release'
             //设置是否混淆
@@ -55,6 +56,10 @@ android {
 
         debug {
             println 'build - debug'
+            minifyEnabled true
+            // Uses new built-in shrinker http://tools.android.com/tech-docs/new-build-system/built-in-shrinker
+            useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -62,7 +67,8 @@ android {
         beta {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "beta"]
         }
-        xiaomi {
+
+/*        xiaomi {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
         }
         m360 {
@@ -79,7 +85,7 @@ android {
         }
         play {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "play"]
-        }
+        }*/
     }
 
 }

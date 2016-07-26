@@ -8,8 +8,9 @@ import com.bumptech.glide.Glide;
 
 /**
  * Glide utils
- * @author wangxinarhat 
- * creat at 2016/7/25
+ *
+ * @author wangxinarhat
+ *         creat at 2016/7/25
  */
 public class GlideUtils {
     public static void loadImage(Context context, String imageUrl, ImageView imageView) {

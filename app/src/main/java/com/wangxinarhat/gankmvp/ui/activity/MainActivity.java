@@ -10,10 +10,12 @@ import android.view.View;
 
 import com.wangxinarhat.gankmvp.R;
 import com.wangxinarhat.gankmvp.data.entity.Gank;
+import com.wangxinarhat.gankmvp.interfaces.ItemType;
 import com.wangxinarhat.gankmvp.interfaces.OnRecyclerViewItemClickListener;
 import com.wangxinarhat.gankmvp.presenter.MainPresenter;
 import com.wangxinarhat.gankmvp.ui.adapter.MainAdapter;
 import com.wangxinarhat.gankmvp.ui.view.MainView;
+import com.wangxinarhat.gankmvp.utils.DateUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -23,7 +25,7 @@ import butterknife.Bind;
 /**
  * Created by wang on 2016/7/22.
  */
-public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter> implements MainView<Gank>,OnRecyclerViewItemClickListener {
+public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter> implements MainView<Gank>, OnRecyclerViewItemClickListener {
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -107,7 +109,7 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter> implem
     private void initRecycleView() {
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MainAdapter();
+        mAdapter = new MainAdapter(this);
 
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
@@ -161,7 +163,26 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter> implem
 
 
     @Override
-    public void onItemClick(View view, int position) {
+    public void onItemClick(View itemView, int position, int itemViewType, Gank gank, View viewImage, View viewText) {
+        ItemType itemTypeEnum = ItemType.valueOf(itemViewType);
+
+        switch (itemTypeEnum) {
+            case ITEM_TYPE_GIRL:
+
+//                GirlDetailActivity.gotoActivity(this, gank.url, DateUtil.toDate(gank.publishedAt), viewImage, viewText);
+                startActivity(GirlDetailActivity.gotoActivity(this, gank.url, DateUtil.toDate(gank.publishedAt), viewImage, viewText));
+                break;
+
+            case ITEM_TYPE_NORMAL:
+
+                break;
+
+            case ITEM_TYPE_CATEGOTY:
+
+                break;
+
+
+        }
 
     }
 }

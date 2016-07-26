@@ -11,8 +11,13 @@ import com.wangxinarhat.gankmvp.R;
 import com.wangxinarhat.gankmvp.api.GankCategory;
 import com.wangxinarhat.gankmvp.data.entity.Gank;
 import com.wangxinarhat.gankmvp.interfaces.ItemType;
+import com.wangxinarhat.gankmvp.interfaces.OnHolderClickListener;
 import com.wangxinarhat.gankmvp.interfaces.OnRecyclerViewItemClickListener;
+import com.wangxinarhat.gankmvp.ui.activity.BaseActivity;
 import com.wangxinarhat.gankmvp.ui.holder.BaseHolder;
+import com.wangxinarhat.gankmvp.ui.holder.HolderCategory;
+import com.wangxinarhat.gankmvp.ui.holder.HolderGirl;
+import com.wangxinarhat.gankmvp.ui.holder.HolderNormal;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,32 +26,39 @@ import java.util.List;
 /**
  * Created by wang on 2016/7/22.
  */
-public class MainAdapter extends RecyclerView.Adapter<BaseHolder> {
+public class MainAdapter extends RecyclerView.Adapter<BaseHolder> implements OnHolderClickListener {
     /**
      * The listener that receives notifications when an item is clicked.
      */
     OnRecyclerViewItemClickListener mOnItemClickListener;
     private List<Gank> mGankList;
+    private BaseActivity mActivity;
 
-    public MainAdapter() {
+    public MainAdapter(BaseActivity activity) {
         mGankList = new ArrayList<>();
         mGankList.add(getDefGankGirl());
-
+        mActivity = activity;
     }
 
     @Override
     public BaseHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view;
+
+        BaseHolder holder;
         if (viewType == ItemType.ITEM_TYPE_GIRL.ordinal()) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_item_girl, null);
+            holder = new HolderGirl(view, this);
+
         } else if (viewType == ItemType.ITEM_TYPE_CATEGOTY.ordinal()) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_item_category, null);
+            holder = new HolderCategory(view, this);
         } else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_item_normal, null);
+            holder = new HolderNormal(view, this);
         }
 
-        return new BaseHolder(view,mOnItemClickListener);
+        return holder;
     }
 
 
@@ -70,11 +82,7 @@ public class MainAdapter extends RecyclerView.Adapter<BaseHolder> {
         } else {
             return ItemType.ITEM_TYPE_NORMAL.ordinal();
         }
-
-
-
     }
-
 
 
     /**
@@ -141,6 +149,8 @@ public class MainAdapter extends RecyclerView.Adapter<BaseHolder> {
 
 
 
-
-
+    @Override
+    public void onHolderClick(View itemView, int position, int itemViewType, Gank gank, View viewImage, View viewText) {
+        mOnItemClickListener.onItemClick(itemView, position, itemViewType, gank, viewImage, viewText);
+    }
 }

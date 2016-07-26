@@ -23,7 +23,9 @@
         </activity>
 
 
-        <activity android:name=".ui.activity.GirlDetailActivity"/>
+        <activity
+            android:name=".ui.activity.GirlDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

@@ -7,17 +7,16 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
-import android.support.v4.view.ViewCompat;
 import android.transition.Transition;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.wangxinarhat.gankmvp.R;
 import com.wangxinarhat.gankmvp.global.BaseApplication;
 import com.wangxinarhat.gankmvp.presenter.GirlDetailPresenter;
 import com.wangxinarhat.gankmvp.ui.view.GrilDetailView;
-import com.wangxinarhat.gankmvp.utils.AndroidUtils;
 
 import butterknife.Bind;
 
@@ -38,15 +37,21 @@ public class GirlDetailActivity extends BaseActivity<GirlDetailPresenter> implem
     ImageView mPhoto;
     private String mUrl;
 
-    public static void gotoActivity(BaseActivity activity, String url, String title, final View viewImage, final View viewText) {
+    public static Intent gotoActivity(BaseActivity activity, String url, String title, final View viewImage, final View viewText) {
         Intent intent = new Intent(BaseApplication.getApplication(), GirlDetailActivity.class);
         intent.putExtra(EXTRA_BUNDLE_URL, url);
         intent.putExtra(EXTRA_BUNDLE_TITLE, title);
 
-        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, new Pair<View, String>(viewImage, VIEW_NAME_HEADER_IMAGE), new Pair<View, String>(viewText, VIEW_NAME_HEADER_TITLE));
+        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
+                new Pair<View, String>(viewImage, VIEW_NAME_HEADER_IMAGE),
+                new Pair<View, String>(viewText, VIEW_NAME_HEADER_TITLE));
 
 
-        ActivityCompat.startActivity(activity, intent, activityOptions.toBundle());
+//        ActivityCompat.startActivity(activity, intent, activityOptions.toBundle());
+
+        return intent;
+
+
     }
 
     @Override
@@ -57,16 +62,21 @@ public class GirlDetailActivity extends BaseActivity<GirlDetailPresenter> implem
         mUrl = getIntent().getStringExtra(EXTRA_BUNDLE_URL);
         setTitle(getIntent().getStringExtra(EXTRA_BUNDLE_TITLE), true);
 
-        ViewCompat.setTransitionName(mPhoto, VIEW_NAME_HEADER_IMAGE);
-        ViewCompat.setTransitionName(AndroidUtils.getTitleViewInToolbar(mToolbar), VIEW_NAME_HEADER_TITLE);
+//        ViewCompat.setTransitionName(mPhoto, VIEW_NAME_HEADER_IMAGE);
+//        ViewCompat.setTransitionName(AndroidUtils.getTitleViewInToolbar(mToolbar), VIEW_NAME_HEADER_TITLE);
+
+        loadItem();
     }
 
     private void loadItem() {
-        if (AndroidUtils.isAndroidL() && addTransitionListener()) {
-            loadThumbnail();
-        } else {
-            loadFullSizeImage();
-        }
+
+        loadFullSizeImage();
+
+//        if (AndroidUtils.isAndroidL() && addTransitionListener()) {
+//            loadThumbnail();
+//        } else {
+//            loadFullSizeImage();
+//        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -117,10 +127,24 @@ public class GirlDetailActivity extends BaseActivity<GirlDetailPresenter> implem
     private void loadFullSizeImage() {
         Picasso.with(this)
                 .load(mUrl)
+                .fit()
                 .noFade()
                 .noPlaceholder()
-                .into(mPhoto);
+
+                .into(mPhoto, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        ActivityCompat.startPostponedEnterTransition(GirlDetailActivity.this);
+                    }
+
+                    @Override
+                    public void onError() {
+                        ActivityCompat.startPostponedEnterTransition(GirlDetailActivity.this);
+                    }
+                });
+
     }
+
 
     @Override
     protected void initPresenter() {
@@ -146,6 +170,7 @@ public class GirlDetailActivity extends BaseActivity<GirlDetailPresenter> implem
     protected void onDestroy() {
         super.onDestroy();
         Picasso.with(this).cancelRequest(mPhoto);
+
     }
 
 }

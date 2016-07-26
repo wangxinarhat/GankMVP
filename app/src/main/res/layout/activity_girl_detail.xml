@@ -8,9 +8,9 @@
     <include layout="@layout/layout_toolbar"/>
 
     <ImageView
+        android:layout_gravity="center"
         android:id="@+id/activity_girl_detail_photo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
