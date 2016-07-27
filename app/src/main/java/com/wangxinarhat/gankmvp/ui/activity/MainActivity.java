@@ -1,9 +1,14 @@
 package com.wangxinarhat.gankmvp.ui.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -169,8 +174,7 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter> implem
         switch (itemTypeEnum) {
             case ITEM_TYPE_GIRL:
 
-//                GirlDetailActivity.gotoActivity(this, gank.url, DateUtil.toDate(gank.publishedAt), viewImage, viewText);
-                startActivity(GirlDetailActivity.gotoActivity(this, gank.url, DateUtil.toDate(gank.publishedAt), viewImage, viewText));
+                jump2Girl(itemView, gank);
                 break;
 
             case ITEM_TYPE_NORMAL:
@@ -184,5 +188,31 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter> implem
 
         }
 
+    }
+
+    private void jump2Girl(View itemView, Gank gank) {
+
+        // Construct an Intent as normal
+        Intent intent = GirlDetailActivity.getIntent(gank.url, DateUtil.toDate(gank.publishedAt));
+
+        // BEGIN_INCLUDE(start_activity)
+        /**
+         * Now create an {@link android.app.ActivityOptions} instance using the
+         * {@link ActivityOptionsCompat#makeSceneTransitionAnimation(Activity, Pair[])} factory
+         * method.
+         */
+        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this,
+
+                // Now we provide a list of Pair items which contain the view we can transitioning
+                // from, and the name of the view it is transitioning to, in the launched activity
+                new Pair<View, String>(itemView.findViewById(R.id.iv_index_photo),
+                        GirlDetailActivity.VIEW_NAME_HEADER_IMAGE),
+                new Pair<View, String>(itemView.findViewById(R.id.tv_video_name),
+                        GirlDetailActivity.VIEW_NAME_HEADER_TITLE));
+
+        // Now we can start the Activity, providing the activity options as a bundle
+        ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
+        // END_INCLUDE(start_activity)
     }
 }

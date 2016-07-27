@@ -7,10 +7,17 @@
 
     <include layout="@layout/layout_toolbar"/>
 
-    <ImageView
-        android:layout_gravity="center"
-        android:id="@+id/activity_girl_detail_photo"
+    <com.wangxinarhat.gankmvp.ui.widget.SquareFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+
+            android:id="@+id/activity_girl_detail_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+    </com.wangxinarhat.gankmvp.ui.widget.SquareFrameLayout>
 
 </LinearLayout>
