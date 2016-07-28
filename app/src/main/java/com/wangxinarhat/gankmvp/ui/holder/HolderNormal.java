@@ -15,8 +15,8 @@ import butterknife.ButterKnife;
  * Created by wang on 2016/7/22.
  */
 public class HolderNormal extends BaseHolder {
-    @Bind(R.id.tv_gank_title)
-    TextView mTvTitle;
+    @Bind(R.id.item_normal_title)
+    TextView mTitle;
 
     private Gank mGank;
 
@@ -28,7 +28,8 @@ public class HolderNormal extends BaseHolder {
     @Override
     public void bindData(Gank gank) {
         mGank = gank;
-        mTvTitle.setText(StringStyleUtils.getGankInfoSequence(gank));
+        mTitle.setText(StringStyleUtils.getGankInfoSequence(gank));
+
     }
 
     @Override

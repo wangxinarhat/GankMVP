@@ -3,6 +3,7 @@ package com.wangxinarhat.gankmvp.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.text.TextUtils;
 import android.webkit.WebView;
 
@@ -44,6 +45,7 @@ public class ArticleDetailActivity extends BaseSwipeRefreshActivity<ArticlePrese
         }
         mPresenter.setUpWebView(mWebView);
         mPresenter.loadUrl(mWebView,url);
+
     }
 
     @Override

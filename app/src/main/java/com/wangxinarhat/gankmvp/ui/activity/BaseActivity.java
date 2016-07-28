@@ -6,7 +6,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.orhanobut.logger.Logger;
 import com.wangxinarhat.gankmvp.R;
 import com.wangxinarhat.gankmvp.base.BasePresenter;
 
@@ -51,9 +50,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-
-        Logger.e("onOptionsItemSelected");
 
         switch (item.getItemId()) {
             case android.R.id.home:

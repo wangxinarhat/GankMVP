@@ -47,14 +47,14 @@ public class MainAdapter extends RecyclerView.Adapter<BaseHolder> implements OnH
 
         BaseHolder holder;
         if (viewType == ItemType.ITEM_TYPE_GIRL.ordinal()) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_item_girl, null);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_girl, null);
             holder = new HolderGirl(view, this);
 
         } else if (viewType == ItemType.ITEM_TYPE_CATEGOTY.ordinal()) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_item_category, null);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category, null);
             holder = new HolderCategory(view, this);
         } else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.gank_item_normal, null);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_normal, null);
             holder = new HolderNormal(view, this);
         }
 

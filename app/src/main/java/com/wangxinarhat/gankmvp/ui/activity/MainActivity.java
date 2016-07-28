@@ -5,12 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.wangxinarhat.gankmvp.R;
@@ -34,6 +39,15 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter> implem
 
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
+
+    @Bind(R.id.nav_view)
+    NavigationView mNavigationView;
+
+
+    @Bind(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+
+
     private MainAdapter mAdapter;
 
     /**
@@ -57,7 +71,25 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter> implem
         super.onCreate(savedInstanceState);
         initRecycleView();
         setTitle(getString(R.string.app_name), false);
+
+
+        initDrawerLayout();
+
     }
+
+    private void initDrawerLayout() {
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+
+
+        if (mNavigationView != null) {
+            setupDrawerContent(mNavigationView);
+        }
+    }
+
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
@@ -179,7 +211,7 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter> implem
 
             case ITEM_TYPE_NORMAL:
 
-                startActivity(ArticleDetailActivity.getIntent(gank.url,gank.desc));
+                startActivity(ArticleDetailActivity.getIntent(gank.url, gank.desc));
                 break;
 
             case ITEM_TYPE_CATEGOTY:
@@ -216,4 +248,51 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter> implem
         ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
         // END_INCLUDE(start_activity)
     }
+
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+
+            super.onBackPressed();
+        }
+    }
+
+    /**
+     * setting NavigationItemSelectedListener
+     *
+     * @param navigationView
+     */
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int id = item.getItemId();
+
+                if (id == R.id.nav_camera) {
+                    // Handle the camera action
+                } else if (id == R.id.nav_gallery) {
+
+                } else if (id == R.id.nav_slideshow) {
+
+                } else if (id == R.id.nav_manage) {
+
+                } else if (id == R.id.nav_share) {
+
+                } else if (id == R.id.nav_send) {
+
+                }
+
+                // Close the navigation drawer when an item is selected.
+                item.setChecked(true);
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+
+            }
+        });
+
+    }
+
 }
