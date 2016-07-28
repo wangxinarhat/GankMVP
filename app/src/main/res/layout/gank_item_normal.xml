@@ -1,33 +1,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/ll_gank_parent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?attr/selectableItemBackground"
-                android:gravity="top|left|center_vertical"
-                android:orientation="horizontal"
-                tools:background="@color/grey_white_1000">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/ll_gank_parent"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="?attr/selectableItemBackground"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              android:paddingBottom="@dimen/dimen_basic1"
+              android:paddingLeft="@dimen/dimen_basic4"
+              android:paddingRight="@dimen/dimen_basic2"
+              android:paddingTop="@dimen/dimen_basic1"
+              tools:background="@color/grey_white_1000">
 
     <TextView
         android:id="@+id/tv_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:gravity="left"
-        android:padding="@dimen/dimen_basic1"
         android:textColor="@color/text_black_text"
         android:textSize="@dimen/text_size_subhead"
         android:textStyle="bold"
-        android:visibility="gone"
         tools:text="Category"
         tools:visibility="visible"/>
 
     <TextView
+        android:layout_weight="1"
         android:id="@+id/tv_gank_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:padding="@dimen/dimen_basic1"
+        android:layout_marginLeft="@dimen/dimen_basic2"
         android:textColor="@color/text_black_secondary"
         android:textSize="@dimen/text_size_caption"
         tools:text="叔叔、叔叔，西湖怎么走？"/>

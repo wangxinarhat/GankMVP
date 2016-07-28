@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.orhanobut.logger.Logger;
 import com.wangxinarhat.gankmvp.R;
 import com.wangxinarhat.gankmvp.base.BasePresenter;
 
@@ -33,33 +34,34 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
 
     public void setTitle(String strTitle, boolean showHome) {
-        setTitle(strTitle);
+        getSupportActionBar().setTitle(strTitle);
         getSupportActionBar().setDisplayShowHomeEnabled(showHome);
         getSupportActionBar().setDisplayHomeAsUpEnabled(showHome);
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (getMenuRes() < 0) {
-            return false;
-        } else {
+        if (!(getMenuRes() < 0)) {
             getMenuInflater().inflate(getMenuRes(), menu);
-            return true;
         }
+        return true;
 
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
 
+        Logger.e("onOptionsItemSelected");
+
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 break;
         }
-
         return super.onOptionsItemSelected(item);
+
     }
 
     /**

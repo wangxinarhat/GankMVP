@@ -14,7 +14,7 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -24,8 +24,10 @@
 
 
         <activity
-            android:name=".ui.activity.GirlDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".ui.activity.GirlDetailActivity"/>
+
+        <activity
+            android:name=".ui.activity.ArticleDetailActivity"/>
 
 
     </application>

@@ -179,6 +179,7 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter> implem
 
             case ITEM_TYPE_NORMAL:
 
+                startActivity(ArticleDetailActivity.getIntent(gank.url,gank.desc));
                 break;
 
             case ITEM_TYPE_CATEGOTY:
