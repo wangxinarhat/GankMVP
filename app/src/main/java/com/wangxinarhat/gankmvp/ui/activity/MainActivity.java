@@ -50,6 +50,8 @@ public class MainActivity extends BaseSwipeRefreshActivity<MainPresenter> implem
 
     private MainAdapter mAdapter;
 
+
+
     /**
      * the flag of has more data or not
      */
